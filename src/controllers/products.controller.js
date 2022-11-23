@@ -30,13 +30,11 @@ const insertProduct = async (req, res) => {
 
 const deleteProduct = async (req, res) => { 
   const { id } = req.params;
-  const { type, message } = await productsService.deleteProduct(id);
+  const { type } = await productsService.deleteProduct(id);
+  
+  if (type) return res.status(type).json({ message: 'Product not found' });
 
-  if (!message) return res.status(404).json({ message: 'Product not found' });
-
-  if (type) return res.status(type).json(message);
-
-  return res.status(204).json(message);
+  return res.sendStatus(204);
 };
 
 module.exports = {
