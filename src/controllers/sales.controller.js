@@ -5,7 +5,7 @@ const getSales = async (_req, res) => {
 
   if (type) return res.status(type).json(message);
 
-  if (!message) return res.status(404).json({ message: 'Sale not found' });
+  // if (!message) return res.status(404).json({ message: 'Sale not found' });
 
   return res.status(200).json(message);
 };
@@ -17,7 +17,17 @@ const insertSale = async (req, res) => {
   return res.status(201).json({ id: message, itemsSold: sale });
 };
 
+const getSalesID = async (req, res) => {
+  const { id } = req.params;
+  const { type, message } = await salesService.getSalesID(Number(id));
+
+  if (type) return res.status(404).json({ message });
+
+  return res.status(200).json(message);
+};
+
 module.exports = {
   getSales,
   insertSale,
+  getSalesID,
 };
