@@ -23,17 +23,17 @@ const validateQuantity = (req, res, next) => {
   const quantity = product.every(
      (quant) => quant.quantity !== null && quant.quantity !== undefined,
    );
-  const result = product.every((quant) => quant.quantity > 0);
+  const verifyQuantity = product.every((quant) => quant.quantity > 0);
   
   if (!quantity) {
     return res.status(400).json({ message: '"quantity" is required' });
   }
 
-  if (!result) {
+  if (!verifyQuantity) {
     return res.status(422).json({
-    message: '"quantity" must be greater than or equal to 1',
-  }); 
-}
+      message: '"quantity" must be greater than or equal to 1',
+    });
+  }
 
   next();
 };

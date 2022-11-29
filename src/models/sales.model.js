@@ -20,7 +20,7 @@ const insertSale = async (saleId, { productId, quantity }) => {
 
   return { saleId, productId, quantity };
 };
-
+  
 const getSales = async () => {
   const [sales] = await connection.execute(
     `SELECT * FROM StoreManager.sales AS s
